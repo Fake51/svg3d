@@ -90,9 +90,9 @@ var svg3d = {
             sin_rad_z = sin(rad_z);
 
         return {
-            x: point.x * cos_rad_z * cos_rad_y + point.y * (-sin_rad_z * cos_rad_x - cos_rad_z * sin_rad_y * sin_rad_x) + point.z * (-sin_rad_z * sin_rad_y + cos_rad_x * cos_rad_z * sin_rad_y),
-            y: point.x * sin_rad_z * cos_rad_y + point.y * (cos_rad_z * cos_rad_x - sin_rad_z * sin_rad_y * sin_rad_x) + point.z * (cos_rad_z * sin_rad_y + sin_rad_z * sin_rad_y * cos_rad_x),
-            z: point.x * -sin_rad_y + point.y * -cos_rad_y * sin_rad_x + point.z * cos_rad_y * cos_rad_x
+            x: point.x * cos_rad_z * cos_rad_y + point.y * (cos_rad_z * sin_rad_y * sin_rad_x - sin_rad_z * cos_rad_x) + point.z * (sin_rad_z * sin_rad_y + cos_rad_x * cos_rad_z * sin_rad_y),
+            y: point.x * sin_rad_z * cos_rad_y + point.y * (cos_rad_z * cos_rad_x + sin_rad_z * sin_rad_y * sin_rad_x) + point.z * (sin_rad_z * sin_rad_y * cos_rad_x - cos_rad_z * sin_rad_x),
+            z: point.x * -sin_rad_y + point.y * (cos_rad_y * sin_rad_x) + point.z * cos_rad_y * cos_rad_x
         };
     },
 
@@ -255,9 +255,9 @@ window.onload = function() {
 
     var interval = window.setInterval(function() {
         svg3d.rotation = {
-            x: svg3d.rotation.x + 2,
-            y: svg3d.rotation.y + 2,
-            z: svg3d.rotation.z + 2
+            x: svg3d.rotation.x + 1,
+            y: svg3d.rotation.y + 1,
+            z: svg3d.rotation.z + 1 
         };
 
         svg3d.updatePolygons();
