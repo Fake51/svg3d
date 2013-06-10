@@ -8,62 +8,6 @@ var svg3d = {
         y: 0,
         z: 0 
     },
-    polygons: [
-        {
-            points: [
-                {x: -100, y: 100, z: 100},
-                {x: 100, y: 100, z: 100},
-                {x: 100, y: -100, z: 100},
-                {x: -100, y: -100, z: 100}
-            ],
-            color: 'blue',
-        },
-        {
-            points: [
-                {x: -100, y: 100, z: -100},
-                {x: 100, y: 100, z: -100},
-                {x: 100, y: -100, z: -100},
-                {x: -100, y: -100, z: -100}
-            ],
-            color: 'brown',
-        },
-        {
-            points: [
-                {x: -100, y: 100, z: 100},
-                {x: 100, y: 100, z: 100},
-                {x: 100, y: 100, z: -100},
-                {x: -100, y: 100, z: -100}
-            ],
-            color: 'yellow',
-        },
-        {
-            points: [
-                {x: -100, y: -100, z: 100},
-                {x: 100, y: -100, z: 100},
-                {x: 100, y: -100, z: -100},
-                {x: -100, y: -100, z: -100}
-            ],
-            color: 'orange',
-        },
-        {
-            points: [
-                {x: 100, y: -100, z: 100},
-                {x: 100, y: 100, z: 100},
-                {x: 100, y: 100, z: -100},
-                {x: 100, y: -100, z: -100}
-            ],
-            color: 'red',
-        },
-        {
-            points: [
-                {x: -100, y: -100, z: 100},
-                {x: -100, y: 100, z: 100},
-                {x: -100, y: 100, z: -100},
-                {x: -100, y: -100, z: -100}
-            ],
-            color: 'purple',
-        }
-    ],
 
     convertDegreesToRadians: function(degree) {
         return degree * Math.PI / 180;
@@ -134,10 +78,12 @@ var svg3d = {
 
     initialized: false,
 
-    initDom: function(svg_element_id) {
+    init: function(svg_element_id, polygons) {
         var svg = document.getElementById(svg_element_id),
             i,
             temp;
+
+        this.polygons = polygons;
 
         if (this.initialized) {
             throw new Error('Already initialized');
@@ -147,7 +93,7 @@ var svg3d = {
             throw new Error('No SVG element present or bad id: ' + svg_element_id);
         }
 
-        this.init();
+        this.initModule();
 
         for (i = this.polygons.length; i; --i) {
             this.polygons[i - 1] = new svg3d.Polygon(this.polygons[i - 1].points, this.polygons[i - 1].color, null, i);
@@ -158,7 +104,7 @@ var svg3d = {
         this.svg_container = svg;
     },
 
-    init: function() {
+    initModule: function() {
         svg3d.Polygon.prototype.getDOMElement = function() {
             return this.element;
         };
@@ -248,18 +194,4 @@ var svg3d = {
 
         this.reorderPolygons();
     }
-};
-
-window.onload = function() {
-    svg3d.initDom('svg');
-
-    var interval = window.setInterval(function() {
-        svg3d.rotation = {
-            x: svg3d.rotation.x + 1,
-            y: svg3d.rotation.y + 1,
-            z: svg3d.rotation.z + 1 
-        };
-
-        svg3d.updatePolygons();
-    }, 33);
 };
