@@ -90,7 +90,7 @@ var svg3d = {
             sin_rad_z = sin(rad_z);
 
         return {
-            x: point.x * cos_rad_z * cos_rad_y + point.y * (cos_rad_z * sin_rad_y * sin_rad_x - sin_rad_z * cos_rad_x) + point.z * (sin_rad_z * sin_rad_y + cos_rad_x * cos_rad_z * sin_rad_y),
+            x: point.x * cos_rad_z * cos_rad_y + point.y * (cos_rad_z * sin_rad_y * sin_rad_x - sin_rad_z * cos_rad_x) + point.z * (sin_rad_z * sin_rad_x + cos_rad_x * cos_rad_z * sin_rad_y),
             y: point.x * sin_rad_z * cos_rad_y + point.y * (cos_rad_z * cos_rad_x + sin_rad_z * sin_rad_y * sin_rad_x) + point.z * (sin_rad_z * sin_rad_y * cos_rad_x - cos_rad_z * sin_rad_x),
             z: point.x * -sin_rad_y + point.y * (cos_rad_y * sin_rad_x) + point.z * cos_rad_y * cos_rad_x
         };
